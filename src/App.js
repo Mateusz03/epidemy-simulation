@@ -32,15 +32,14 @@ const App = () => {
     <Container>
       <Parameters />
       <Right>
-        <Routes>
+        {/* <Routes>
           <Route
             path="/"
             element={<SimulationSelected>Chose Simulation</SimulationSelected>}
           />
           <Route path="/add" element={<AddSimulation />} />
-          <Route path="/selected" />
-        </Routes>
-
+          <Route path="/selected" element={<></>} />
+        </Routes> */}
         <Header />
         <LinearChart />
       </Right>
