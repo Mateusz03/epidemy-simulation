@@ -1,8 +1,11 @@
+import { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import heart from "../assets/img/heart-attack.png";
 import hospital from "../assets/img/hospital.png";
 import people from "../assets/img/people.png";
 import smile from "../assets/img/smile-face.png";
+import { CurrentParameter } from "../App";
+
 const Container = styled.div`
   width: 100%;
   height: 20%;
@@ -56,17 +59,44 @@ const Image = (props) => {
   );
 };
 
-const parameters = [
-  { record: "Pi", text: "People", img: people, people: 0 },
-  { record: "Pv", text: "Infected", img: hospital, people: 0 },
-  { record: "Pm", text: "Dead", img: heart, people: 0 },
-  { record: "Pr", text: "Recovered", img: smile, people: 0 },
-];
-
 const Header = () => {
+  const { current, setCurrent } = useContext(CurrentParameter);
+  const [display, setDisplay] = useState([
+    { record: "Pi", text: "People", img: people, people: 0 },
+    { record: "Pv", text: "Infected", img: hospital, people: 0 },
+    { record: "Pm", text: "Dead", img: heart, people: 0 },
+    { record: "Pr", text: "Recovered", img: smile, people: 0 },
+  ]);
+  useEffect(() => {
+    if (current !== undefined) {
+      setDisplay((state) => [
+        { ...state[0], people: current.people },
+        { ...state[1], people: current.infected },
+        { ...state[2], people: current.dead },
+        { ...state[3], people: current.recovered },
+      ]);
+    }
+
+    // setDisplay([
+    //   { record: "Pi", text: "People", img: people, people: current.people },
+    //   {
+    //     record: "Pv",
+    //     text: "Infected",
+    //     img: hospital,
+    //     people: current.infected,
+    //   },
+    //   { record: "Pm", text: "Dead", img: heart, people: current.dead },
+    //   {
+    //     record: "Pr",
+    //     text: "Recovered",
+    //     img: smile,
+    //     people: current.recovered,
+    //   },
+    // ]);
+  }, [current]);
   return (
     <Container>
-      {parameters.map((e, i) => {
+      {display.map((e, i) => {
         return (
           <Display key={i} record={e.record}>
             <Text>

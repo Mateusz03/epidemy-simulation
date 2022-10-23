@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import add from "../assets/img/add.png";
-import Simulations from "./Simulations";
 import { useNavigate } from "react-router-dom";
+import Simulaitons from "./Simulations";
+import { useState } from "react";
 
 const Container = styled.div`
   width: 20%;
@@ -10,9 +11,10 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 32px;
-  background-color: rgba(158, 192, 201, 0.25);
+  background-color: #c7d3d7;
   box-shadow: 2px 0px 4px rgba(33, 33, 33, 0.25);
   border-radius: 0 14px 14px 0;
+  z-index: 2;
 `;
 const Title = styled.p`
   text-align: center;
@@ -45,15 +47,13 @@ const AddImg = styled.img`
   width: 36px;
   height: 36px;
 `;
-const Button = () => {
+const Button = ({ setState }) => {
   const navigate = useNavigate();
-  const onClick = () => {
-    navigate("/add");
-  };
   return (
     <AddContainer
       onClick={() => {
-        onClick();
+        navigate("/add");
+        setState(true);
       }}
     >
       <AddText>Add</AddText>
@@ -61,13 +61,14 @@ const Button = () => {
     </AddContainer>
   );
 };
-const Parameters = () => {
+const LeftBar = () => {
+  const [addState, setAddState] = useState(false);
   return (
     <Container>
       <Title>Simulations</Title>
-      <Simulations />
-      <Button />
+      <Simulaitons addState={addState} setState={setAddState} />
+      <Button setState={setAddState} />
     </Container>
   );
 };
-export default Parameters;
+export default LeftBar;
