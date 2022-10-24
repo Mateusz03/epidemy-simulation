@@ -74,7 +74,7 @@ const CreateSim = () => {
 
   useEffect(() => {
     switch (currentIndex) {
-      case 9:
+      case 10:
         if (updated.id) {
           setButtonText("Update");
         } else {
@@ -111,17 +111,6 @@ const CreateSim = () => {
     } else {
       alert("Enter all data!");
     }
-
-    // if (
-    //   buttonText === "Update" &&
-    //   values.every((i) => {
-    //     return i.param === true;
-    //   })
-    // ) {
-    //   await updateSimulation({ id: updated.id, values: values });
-    // } else {
-    //   alert("Enter all data!");
-    // }
   };
   return (
     <Add>
@@ -138,6 +127,7 @@ const CreateSim = () => {
               { name: "Mortality", param: 50 },
               { name: "Infection Chance", param: 5 },
               { name: "Recovery Chance", param: 5 },
+              { name: "Lost Immunity ", param: 5 },
               { name: "Recovery Time", param: "" },
               { name: "Mortality Time", param: "" },
               { name: "Simulation Time", param: "" },

@@ -65,6 +65,7 @@ const Button = ({ setState }) => {
             { name: "Mortality", param: 50 },
             { name: "Infection Chance", param: 5 },
             { name: "Recovery Chance", param: 5 },
+            { name: "Lost Immunity", param: 5 },
             { name: "Recovery Time", param: "" },
             { name: "Mortality Time", param: "" },
             { name: "Simulation Time", param: "" },

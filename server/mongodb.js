@@ -47,7 +47,7 @@ exports.Delete = async (id) => {
     await collection.deleteOne({ _id: ObjectId(id) });
   } finally {
     client.close();
-    return;
+    return true;
   }
 };
 exports.Update = async (val) => {

@@ -50,7 +50,8 @@ const Parameter = (props) => {
             value.name !== "Mortality" &&
             value.name !== "Infection Chance" &&
             value.name !== "Simulation Name" &&
-            value.name !== "Recovery Chance"
+            value.name !== "Recovery Chance" &&
+            value.name !== "Lost Immunity"
           ) {
             val = (
               <InputContainer key={i}>
@@ -97,7 +98,8 @@ const Parameter = (props) => {
           } else if (
             value.name === "Mortality" ||
             value.name === "Infection Chance" ||
-            value.name === "Recovery Chance"
+            value.name === "Recovery Chance" ||
+            value.name === "Lost Immunity"
           ) {
             val = (
               <InputContainer key={i}>

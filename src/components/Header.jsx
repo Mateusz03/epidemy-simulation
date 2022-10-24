@@ -76,23 +76,6 @@ const Header = () => {
         { ...state[3], people: current.recovered },
       ]);
     }
-
-    // setDisplay([
-    //   { record: "Pi", text: "People", img: people, people: current.people },
-    //   {
-    //     record: "Pv",
-    //     text: "Infected",
-    //     img: hospital,
-    //     people: current.infected,
-    //   },
-    //   { record: "Pm", text: "Dead", img: heart, people: current.dead },
-    //   {
-    //     record: "Pr",
-    //     text: "Recovered",
-    //     img: smile,
-    //     people: current.recovered,
-    //   },
-    // ]);
   }, [current]);
   return (
     <Container>
