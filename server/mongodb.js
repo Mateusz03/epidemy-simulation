@@ -1,10 +1,14 @@
 const { MongoClient, ObjectId } = require("mongodb");
 
+const host = "mongodb://localhost:27017";
+const db = "simulation";
+const coll = "simulation";
+
 exports.Insert = async (obj) => {
-  const client = new MongoClient("mongodb://localhost:27017");
+  const client = new MongoClient(host);
   try {
-    const database = client.db("simulation");
-    const simulation = database.collection("simulation");
+    const database = client.db(db);
+    const simulation = database.collection(coll);
     const doc = { obj };
     await simulation.insertOne(doc);
   } finally {
@@ -13,12 +17,12 @@ exports.Insert = async (obj) => {
   }
 };
 exports.Select = async () => {
-  const client = new MongoClient("mongodb://localhost:27017");
+  const client = new MongoClient(host);
   let val;
 
   try {
-    const database = client.db("simulation");
-    const collection = database.collection("simulation");
+    const database = client.db(db);
+    const collection = database.collection(coll);
     await collection
       .find({})
       .project({})
@@ -35,10 +39,10 @@ exports.Select = async () => {
   }
 };
 exports.Delete = async (id) => {
-  const client = new MongoClient("mongodb://localhost:27017");
+  const client = new MongoClient(host);
   try {
-    const database = client.db("simulation");
-    const collection = database.collection("simulation");
+    const database = client.db(db);
+    const collection = database.collection(coll);
 
     await collection.deleteOne({ _id: ObjectId(id) });
   } finally {
@@ -47,10 +51,10 @@ exports.Delete = async (id) => {
   }
 };
 exports.Update = async (val) => {
-  const client = new MongoClient("mongodb://localhost:27017");
+  const client = new MongoClient(host);
   try {
-    const database = client.db("simulation");
-    const collection = database.collection("simulation");
+    const database = client.db(db);
+    const collection = database.collection(coll);
     await collection.updateOne(
       { _id: ObjectId(val.id) },
       {
