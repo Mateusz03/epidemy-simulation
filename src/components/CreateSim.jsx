@@ -1,10 +1,12 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import close from "../assets/img/add.png";
 import HorizontalSlider from "./HorizontalSlider";
 import Parameter from "./Parameter";
 import addSimulation from "./backend-conn/addSimulation";
+import { Values } from "../App";
+import updateSimulation from "./backend-conn/updateSimulation";
 
 const Add = styled.div`
   padding-left: 20%;
@@ -59,36 +61,37 @@ const Button = styled.div`
 `;
 
 const CreateSim = () => {
+  const { updated, setUpdate } = useContext(Values);
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [buttonText, setButtonText] = useState("Next");
-  const [values, setValues] = useState([
-    { name: "Simulation Name", param: "" },
-    { name: "Population", param: "" },
-    { name: "Infected", param: "" },
-    { name: "Reproduction", param: "" },
-    { name: "Mortality", param: 50 },
-    { name: "Infection Chance", param: 5 },
-    { name: "Recovery Chance", param: 5 },
-    { name: "Recovery Time", param: "" },
-    { name: "Mortality Time", param: "" },
-    { name: "Simulation Time", param: "" },
-  ]);
+
+  const [values, setValues] = useState(updated.parameters);
+
+  useEffect(() => {
+    setValues(updated.parameters);
+  }, [updated]);
+
   useEffect(() => {
     switch (currentIndex) {
       case 9:
-        setButtonText("Continue");
+        if (updated.id) {
+          setButtonText("Update");
+        } else {
+          setButtonText("Continue");
+        }
         return;
       default:
         setButtonText("Next");
     }
-  }, [currentIndex]);
+  }, [currentIndex, updated]);
 
   const simulation = async () => {
-    if (buttonText !== "Continue") {
+    if (buttonText !== "Continue" && buttonText !== "Update") {
       setCurrentIndex(currentIndex + 1);
       return;
     }
+
     if (
       buttonText === "Continue" &&
       values.every((i) => {
@@ -96,11 +99,29 @@ const CreateSim = () => {
       })
     ) {
       await addSimulation(values);
-      window.location.reload();
+      navigate("/");
+    } else if (
+      buttonText === "Update" &&
+      values.every((i) => {
+        return i.param !== "";
+      })
+    ) {
+      await updateSimulation({ id: updated.id, data: values });
       navigate("/");
     } else {
       alert("Enter all data!");
     }
+
+    // if (
+    //   buttonText === "Update" &&
+    //   values.every((i) => {
+    //     return i.param === true;
+    //   })
+    // ) {
+    //   await updateSimulation({ id: updated.id, values: values });
+    // } else {
+    //   alert("Enter all data!");
+    // }
   };
   return (
     <Add>
@@ -108,6 +129,20 @@ const CreateSim = () => {
         src={close}
         onClick={() => {
           navigate("/");
+          setUpdate({
+            parameters: [
+              { name: "Simulation Name", param: "" },
+              { name: "Population", param: "" },
+              { name: "Infected", param: "" },
+              { name: "Reproduction", param: "" },
+              { name: "Mortality", param: 50 },
+              { name: "Infection Chance", param: 5 },
+              { name: "Recovery Chance", param: 5 },
+              { name: "Recovery Time", param: "" },
+              { name: "Mortality Time", param: "" },
+              { name: "Simulation Time", param: "" },
+            ],
+          });
         }}
       />
       <Parameter
@@ -122,8 +157,8 @@ const CreateSim = () => {
           setCurrentIndex={setCurrentIndex}
         />
         <Button
-          onClick={() => {
-            simulation();
+          onClick={async () => {
+            await simulation();
           }}
         >
           {buttonText}

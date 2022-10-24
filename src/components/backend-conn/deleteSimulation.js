@@ -5,7 +5,7 @@ const deleteSimulation = async (val) => {
   await axios
     .post("http://localhost:3001/delete", { id: val })
     .then((response) => {
-      res = response;
+      res = response.data;
     })
     .catch((error) => {
       console.log(error.message);

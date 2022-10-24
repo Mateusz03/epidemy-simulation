@@ -4,7 +4,6 @@ module.exports.startSimulation = async (data) => {
     simulationParameters: data,
     data: [],
   };
-
   const Mortality = parseInt(data[4].param);
   const MortalityTime = parseInt(data[8].param);
   const RecoveryChance = parseInt(data[6].param);

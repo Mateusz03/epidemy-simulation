@@ -52,7 +52,6 @@ const LinearChart = () => {
     }
   }, [param, id]);
 
-  console.log();
   return (
     <Container>
       <ChartContainer>

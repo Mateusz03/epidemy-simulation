@@ -8,6 +8,7 @@ import { createContext, useState } from "react";
 
 export const Parameters = createContext();
 export const CurrentParameter = createContext();
+export const Values = createContext();
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -36,27 +37,43 @@ const SimulationSelected = styled.div`
 const App = () => {
   const [param, setParam] = useState();
   const [current, setCurrent] = useState();
+  const [updated, setUpdate] = useState({
+    parameters: [
+      { name: "Simulation Name", param: "" },
+      { name: "Population", param: "" },
+      { name: "Infected", param: "" },
+      { name: "Reproduction", param: "" },
+      { name: "Mortality", param: 50 },
+      { name: "Infection Chance", param: 5 },
+      { name: "Recovery Chance", param: 5 },
+      { name: "Recovery Time", param: "" },
+      { name: "Mortality Time", param: "" },
+      { name: "Simulation Time", param: "" },
+    ],
+  });
   return (
     <Container>
-      <Parameters.Provider value={{ param, setParam }}>
-        <CurrentParameter.Provider value={{ current, setCurrent }}>
-          <LeftBar />
-          <Right>
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <SimulationSelected>Select simulation</SimulationSelected>
-                }
-              />
-              <Route path="/add" element={<CreateSim />} />
-              <Route path="/main" element={<></>} />
-            </Routes>
-            <Header />
-            <LinearChart />
-          </Right>
-        </CurrentParameter.Provider>
-      </Parameters.Provider>
+      <Values.Provider value={{ updated, setUpdate }}>
+        <Parameters.Provider value={{ param, setParam }}>
+          <CurrentParameter.Provider value={{ current, setCurrent }}>
+            <LeftBar />
+            <Right>
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <SimulationSelected>Select simulation</SimulationSelected>
+                  }
+                />
+                <Route path="/add" element={<CreateSim />} />
+                <Route path="/main" element={<></>} />
+              </Routes>
+              <Header />
+              <LinearChart />
+            </Right>
+          </CurrentParameter.Provider>
+        </Parameters.Provider>
+      </Values.Provider>
     </Container>
   );
 };

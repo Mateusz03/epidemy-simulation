@@ -1,10 +1,10 @@
-import { useEffect, useState, createContext, useContext } from "react";
-import loadSimulation from "./backend-conn/loadSimulation";
+import { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { Parameters } from "../App";
+import { Parameters, Values } from "../App";
 import del from "../assets/img/delete.png";
 import update from "../assets/img/update.png";
+import loadSimulation from "./backend-conn/loadSimulation";
 import deleteSimulation from "./backend-conn/deleteSimulation";
 const Container = styled.div`
   width: 100%;
@@ -46,20 +46,17 @@ const Img = styled.img`
   }
 `;
 const Simulaitons = (props) => {
+  const { updated, setUpdate } = useContext(Values);
   const { param, setParam } = useContext(Parameters);
   const [target, setTarget] = useState();
   const [table, setTable] = useState();
 
   const navigate = useNavigate();
   useEffect(() => {
-    loadSimulation().then(
-      function (value) {
-        setTable(value);
-      },
-      function (error) {
-        console.log(error);
-      },
-    );
+    async function fetchData() {
+      setTable(await loadSimulation());
+    }
+    fetchData();
   }, []);
   return (
     <Container>
@@ -88,11 +85,23 @@ const Simulaitons = (props) => {
               <Img
                 src={del}
                 onClick={async () => {
-                  console.log(table.splice(i, 1));
-                  // await deleteSimulation(val._id);
+                  if ((await deleteSimulation(val._id)) === true)
+                    setTable((state) =>
+                      state.filter((_, index) => index !== i),
+                    );
+                  navigate("/");
                 }}
               />
-              <Img src={update} />
+              <Img
+                src={update}
+                onClick={() => {
+                  navigate("/add");
+                  setUpdate({
+                    id: val._id,
+                    parameters: val.obj.simulationParameters,
+                  });
+                }}
+              />
             </TextContainer>
           );
         })}

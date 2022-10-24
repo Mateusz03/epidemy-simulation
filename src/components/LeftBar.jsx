@@ -2,7 +2,8 @@ import styled from "styled-components";
 import add from "../assets/img/add.png";
 import { useNavigate } from "react-router-dom";
 import Simulaitons from "./Simulations";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Values } from "../App";
 
 const Container = styled.div`
   width: 20%;
@@ -49,11 +50,26 @@ const AddImg = styled.img`
 `;
 const Button = ({ setState }) => {
   const navigate = useNavigate();
+  const { updated, setUpdate } = useContext(Values);
   return (
     <AddContainer
       onClick={() => {
         navigate("/add");
         setState(true);
+        setUpdate({
+          parameters: [
+            { name: "Simulation Name", param: "" },
+            { name: "Population", param: "" },
+            { name: "Infected", param: "" },
+            { name: "Reproduction", param: "" },
+            { name: "Mortality", param: 50 },
+            { name: "Infection Chance", param: 5 },
+            { name: "Recovery Chance", param: 5 },
+            { name: "Recovery Time", param: "" },
+            { name: "Mortality Time", param: "" },
+            { name: "Simulation Time", param: "" },
+          ],
+        });
       }}
     >
       <AddText>Add</AddText>
