@@ -40,6 +40,8 @@ Na wykresie widoczne są kropki które aktualizują status wyświetlaczy widoczn
 
 `Konfiguracja`
 
+`Tylko main branch`
+
 `MongoDB`
 
 `Database:` simulation
