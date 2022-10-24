@@ -17,17 +17,17 @@ Działa na  http://localhost:3001
 ## `Użyte biblioteki`
 
 `Front-end`
-chart.js oraz react-chartjs-2
-react-router-dom
+chart.js oraz react-chartjs-2,
+react-router-dom,
 styled-components
 
 `Back-end`
-node.js
-nodemon
-mongodb
-axios
-body-parser
-cors
+node.js,
+nodemon,
+mongodb,
+axios,
+body-parser,
+cors,
 express.js
 
 `Sposób działania`
