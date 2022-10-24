@@ -46,5 +46,5 @@ Na wykresie widoczne są kropki które aktualizują status wyświetlaczy widoczn
 `Collection:` simulation
 `Host:` localhost:27017
 
-`Plik z paroma przykładami do importu w bazie:`
+`Plik z paroma przykładami do importu do bazy:`
 [simulation.zip](https://github.com/Mateusz03/epidemy-simulation/files/9855540/simulation.zip)
