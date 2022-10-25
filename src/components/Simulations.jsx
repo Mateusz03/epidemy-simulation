@@ -15,7 +15,6 @@ const Container = styled.div`
   flex-direction: column;
   gap: 6px;
   align-items: center;
-  justify-content: center;
   overflow: hidden;
   overflow-y: visible;
   &::-webkit-scrollbar {
