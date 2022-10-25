@@ -10,6 +10,12 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+`;
+
+const Text = styled.div`
+  font-size: 21px;
+  font-weight: 600;
 `;
 
 const ChartContainer = styled.div`
@@ -29,6 +35,8 @@ const LinearChart = () => {
   const [infected, setInfected] = useState([]);
   const [dead, setDead] = useState([]);
   const [recovered, setRecovered] = useState([]);
+  const [day, setDay] = useState(0);
+  const [currentItem, setItem] = useState(0);
   const [id, setId] = useState("");
 
   useEffect(() => {
@@ -54,9 +62,11 @@ const LinearChart = () => {
 
   return (
     <Container>
+      <Text>Day {day}</Text>
       <ChartContainer>
         <Line
           options={{
+            responsive: true,
             interaction: {
               mode: "x",
             },
@@ -81,7 +91,9 @@ const LinearChart = () => {
               intersect: false,
             },
             onHover: function (evt, item) {
-              if (item.length) {
+              if (item.length && item[0].index !== currentItem) {
+                setItem(item[0].index);
+                setDay(item[0].index);
                 setCurrent({
                   people: people[item[0].index],
                   infected: infected[item[0].index],
