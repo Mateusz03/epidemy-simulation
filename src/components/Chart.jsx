@@ -60,17 +60,25 @@ const LinearChart = () => {
             interaction: {
               mode: "x",
             },
-           elements:{
-point:{
-  borderWidth:0,
-  backgroundColor: 'rgba(0,0,0,0)'
-}
-           },
+            elements: {
+              point: {
+                borderWidth: 0,
+                backgroundColor: "rgba(0,0,0,0)",
+              },
+            },
             maintainAspectRatio: false,
             plugins: {
               legend: {
                 display: false,
               },
+              tooltip: {
+                mode: "index",
+                intersect: false,
+              },
+            },
+            hover: {
+              mode: "nearest",
+              intersect: false,
             },
             onHover: function (evt, item) {
               if (item.length) {
