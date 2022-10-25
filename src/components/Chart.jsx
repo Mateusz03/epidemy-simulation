@@ -60,6 +60,12 @@ const LinearChart = () => {
             interaction: {
               mode: "x",
             },
+           elements:{
+point:{
+  borderWidth:0,
+  backgroundColor: 'rgba(0,0,0,0)'
+}
+           },
             maintainAspectRatio: false,
             plugins: {
               legend: {
@@ -85,28 +91,24 @@ const LinearChart = () => {
                 id: 1,
                 label: "People",
                 data: people,
-                backgroundColor: "#212121",
                 borderColor: "#63D5F0",
               },
               {
                 id: 2,
                 label: "Infected",
                 data: infected,
-                backgroundColor: "#212121",
                 borderColor: "#F98449",
               },
               {
                 id: 3,
                 label: "Dead",
                 data: dead,
-                backgroundColor: "#212121",
                 borderColor: "#F34C4E",
               },
               {
                 id: 4,
                 label: "Recovered",
                 data: recovered,
-                backgroundColor: "#212121",
                 borderColor: "#39CDAF",
               },
             ],
