@@ -8,11 +8,45 @@ import loadSimulation from "./backend-conn/loadSimulation";
 import deleteSimulation from "./backend-conn/deleteSimulation";
 const Container = styled.div`
   width: 100%;
+  height: 60%;
+  padding-top: 5%;
+  padding-bottom: 5%;
   display: flex;
   flex-direction: column;
   gap: 6px;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  overflow-y: visible;
+  &::-webkit-scrollbar {
+    width: 4px;
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 0px;
+    background-color: #dfe9eb;
+  }
+
+  &::-webkit-scrollbar-track:hover {
+    background-color: #b8c0c2;
+  }
+
+  &::-webkit-scrollbar-track:active {
+    background-color: #b8c0c2;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #9eadb3;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #9eadb3;
+  }
+
+  &::-webkit-scrollbar-thumb:active {
+    background-color: #62a34b;
+  }
 `;
 const TextContainer = styled.div`
   width: 100%;
